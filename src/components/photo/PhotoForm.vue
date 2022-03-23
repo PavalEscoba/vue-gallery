@@ -1,18 +1,22 @@
 <template>
   <v-container>
-    <v-row class="d-flex">
-      <v-text-field v-model="title" />
-      <v-file-input v-model="image" />
-      <v-btn @click="addPhoto">Add a photo</v-btn>
+    <v-row>
+      <v-col cols="6">
+        <v-text-field v-model="title" />
+        <v-file-input v-model="img" />
+        <v-btn @click="addPhoto">Add photo</v-btn>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
 export default {
+  name: 'PhotoForm',
   data: () => ({
     title: '',
-    image: null,
+    img: null,
+
   }),
   methods: {
     addPhoto() {
@@ -23,9 +27,9 @@ export default {
           title: this.title,
           url: reader.result,
         };
-        this.$emit('addPhoto', photo);
+        this.$emit('addingPhoto', photo);
       };
-      reader.readAsDataURL(this.image);
+      reader.readAsDataURL(this.img);
     },
   },
 };
