@@ -1,9 +1,16 @@
 <template>
   <v-container>
     <PhotoForm @addingPhoto="pushingPhoto" />
+
     <v-row>
-      <Photo v-for="photo in photos" :key="photo.id" :photo="photo" />
+      <Photo
+        v-for="photo in photos"
+        :key="photo.id"
+        :photo="photo"
+        @openPhoto="openPhoto"
+      />
     </v-row>
+    <PhotoDialog :photo="currentPhoto" :v-model="dialogVisible" />
   </v-container>
 </template>
 
@@ -18,6 +25,8 @@ export default {
   },
   data: () => ({
     photos: [],
+    currentPhoto: {},
+    value: false,
   }),
   mounted() {
     this.fetchToDo();
@@ -31,6 +40,7 @@ export default {
     pushingPhoto(photo) {
       this.photos.push(photo);
     },
+
   },
 };
 </script>
