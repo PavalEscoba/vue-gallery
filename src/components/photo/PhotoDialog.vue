@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="value" max-width="600">
+  <v-dialog v-model="dialogVisible" max-width="600">
     <v-card>
       <v-card-title>{{ photo.title }} </v-card-title>
       <v-card-text>
@@ -11,21 +11,28 @@
 
 <script>
 export default {
-  propd: {
+  props: {
     photo: {
       type: Object,
       required: true,
     },
+    value: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  created() {
+    this.dialogVisible = this.value;
   },
   data: () => ({
     dialogVisible: false,
   }),
-  created() {
-    this.dialogVisible = this.value;
-  },
   watch: {
     value(newValue) {
       this.dialogVisible = newValue;
+    },
+    dialogVisible(newValue) {
+      this.$emit('input', newValue);
     },
   },
 };

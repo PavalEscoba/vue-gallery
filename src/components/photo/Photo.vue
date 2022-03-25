@@ -2,7 +2,7 @@
   <v-col cols="4">
     <v-card @click="openPhoto">
       <v-card-title>
-        {{ photo.title }}
+        {{ fullTitle }}
       </v-card-title>
       <v-card-text>
         <v-img :src="photo.url" width="200" height="200" />
@@ -17,6 +17,11 @@ export default {
     photo: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    fullTitle() {
+      return `full Name is ${this.photo.title}`;
     },
   },
   methods: {
